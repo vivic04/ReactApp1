@@ -111,11 +111,11 @@ const TableOne = () => {
 
     { id: 1, title: 'Ram', task: 'work' },
 
-    { id: 2, title: 'Ram', task: 'work' },
+    { id: 2, title: 'Aditya', task: 'work' },
 
-    { id: 3, title: 'Ram', task: 'work' },
+    { id: 3, title: 'John', task: 'work' },
 
-    { id: 4, title: 'Ram', task: 'work' },
+    { id: 4, title: 'Vicky', task: 'work' },
 
   ]);
 

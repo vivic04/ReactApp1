@@ -15,7 +15,7 @@ const App = () => {
   
   return(
   <NavigationContainer> 
-    <Stack.Navigator initialRouteName="Dashboard">
+    <Stack.Navigator initialRouteName="Registerscreen">
         <Stack.Screen name="Home" component={Registerscreen} options={{title: 'User Register'}}/>
         <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
@@ -73,32 +73,39 @@ function Registerscreen ({ navigation }) {
   const onRegister = () => {
     
     if (!textInputFirstName.trim()) {
-      console.warn('Please Enter First Name');
+      alert('Please Enter First Name');
       return;
     }
     if (!textInputLastName.trim()) {
-      console.warn('Please Enter Last Name');
+      alert('Please Enter Last Name');
       return;
     }
   
     if (!textInputEmail.trim()) {
-      console.warn('Please Enter Email');
+      alert('Please Enter Email');
       return;
     }
     if (!PhoneInputValue.trim()){
-      console.warn('Please Enter Phone number');
+      alert('Please Enter Phone number');
+      return
+    } else if (PhoneInputValue.trim()){
+      onlynumbers(PhoneInputValue)
+      return
     }
     if (!textInputPassword.trim()) {
-      console.warn('Please Enter Password');
+      alert('Please Enter Password');
+      return
   
     }
     else if (textInputPassword !== TextInputConfirmPassword) {
       // console.warn('Passwords do not match');
       alert('Passwords do not match');
+      return
   
     }
     else if (textInputPassword.trim()){
       validate(textInputPassword)
+      return
     }
   };
   const validate = (password) => { 
@@ -189,8 +196,8 @@ function Registerscreen ({ navigation }) {
             onPress={checkTextInput}
           /> */}
           <TouchableOpacity style = {{backgroundColor: "lightcoral", paddingBottom: 5, marginTop: 0, justifyContent: 'center',
-           alignItems: 'center', width: 400, alignSelf: 'center', height: 40}} onPress={onRegister}>
-            <Text style = {{fontSize: 23, fontWeight: 300}}> Register </Text>
+           alignItems: 'center', width: 400, alignSelf: 'center', height: 80, marginTop: 20}} onPress={onRegister}>
+            <Text style = {{fontSize: 25, fontWeight: 300}}> Register </Text>
             
 
           </TouchableOpacity>
@@ -203,6 +210,23 @@ function Registerscreen ({ navigation }) {
 
   );
 }
+
+const onlynumbers = (input) => {
+  for (i in input) { 
+  if (!isNaN(i) || input.length > 10) {
+      alert('Please check the number and enter valid values only')
+      return
+  } 
+}
+}
+
+const checkemail = (input) => {
+  if (!('@gmail.com' || '@hotmail.com' || '@yahoo.com' in input)) {
+    alert('enter a valid email address')
+  }
+}
+
+
 
 function Dashboard() {
     const styles = StyleSheet.create({
