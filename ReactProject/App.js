@@ -83,7 +83,10 @@ function Registerscreen ({ navigation }) {
   
     if (!textInputEmail.trim()) {
       alert('Please Enter Email');
-      return;
+    }
+    else if (textInputEmail.trim()){
+      checkemail(textInputEmail)
+      return
     }
     if (!PhoneInputValue.trim()){
       alert('Please Enter Phone number');
@@ -221,12 +224,10 @@ const onlynumbers = (input) => {
 }
 
 const checkemail = (input) => {
-  if (!('@gmail.com' || '@hotmail.com' || '@yahoo.com' in input)) {
-    alert('enter a valid email address')
+  if (!input.includes('@gmail.com' || '@hotmail.com' || '@yahoo.com')) {
+    alert('Please enter a valid email address')
   }
 }
-
-
 
 function Dashboard() {
     const styles = StyleSheet.create({
