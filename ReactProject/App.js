@@ -309,6 +309,12 @@ function Userinfo({route}) {
         placeholderTextColor={'black'}
         keyboardType="email-address"
       />
+      <Text style={{...styles.field, paddingTop: 5, textAlign: 'left', color: 'black', fontSize: 18, paddingLeft: 20}}> Task </Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder={route.params.item.task}
+        placeholderTextColor={'black'}
+      />
     </View> 
       </>
   )
