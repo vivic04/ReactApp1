@@ -13,6 +13,7 @@ import {TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TableOne from './Tableone';
+import { Image } from 'react-native';
 
 
 const Stack = createNativeStackNavigator();
@@ -262,12 +263,54 @@ function Dashboard() {
   );
 }
 
-function Userinfo() {
+function Userinfo({route}) {
   return (
-  <View>
+  <><View>
+    <View backgroundColor='navy'>
+    <TouchableOpacity style = {{
+        backgroundColor: 'navy',
+        justifyContent: 'flex-end',
+        paddingRight: 10,
+        alignItems: 'flex-end',
+        width: 100,
+        alignSelf: 'flex-end',
+        height: 40,
+        marginTop: 5,
+    }} >
 
-    <Text> </Text>
-  </View>
+      <Text style = {{fontSize: 15, color: 'white',}}> SAVE </Text>
+    </TouchableOpacity>
+      <View style={{ backgroundColor: 'navy', height: 200, alignItems: 'center' }}>
+        <Text style={{ fontSize: 25, color: 'white' }}>
+          Edit Profile
+
+        </Text>
+        <View style={{ paddingTop: 10 }}>
+          <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: route.params.item.userimage }} />
+        </View>
+      </View>
+      </View>
+      <Text style={{...styles.field, paddingTop: 30, textAlign: 'left', color: 'black',  fontSize: 18, paddingLeft: 20}}> Username </Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder={route.params.item.title}
+        placeholderTextColor={'black'}
+      />
+      <Text style={{...styles.field, paddingTop: 5, textAlign: 'left', color: 'black', fontSize: 18, paddingLeft: 20}}> Phone number </Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder={route.params.item.phone}
+        placeholderTextColor={'black'}
+      />
+      <Text style={{...styles.field, paddingTop: 5, textAlign: 'left', color: 'black', fontSize: 18, paddingLeft: 20}}> Email </Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder={route.params.item.email}
+        placeholderTextColor={'black'}
+        keyboardType="email-address"
+      />
+    </View> 
+      </>
   )
 
 }

@@ -104,18 +104,18 @@ import { useNavigation } from '@react-navigation/native';
 const TableOne = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([
-    {id: 1, title: 'Ram', task: 'work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568'},
+    {id: 1, title: 'Ram', task: 'work', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
 
-    {id: 2, title: 'Aditya', task: 'work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568'},
+    {id: 2, title: 'Aditya', task: 'work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
 
-    {id: 3, title: 'John', task: 'work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568'},
+    {id: 3, title: 'John', task: 'work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '546809586', email: 'john.bosh@gmail.com'},
 
-    {id: 4, title: 'Vicky', task: 'work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568'},
+    {id: 4, title: 'Vicky', task: 'work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '029390559', email: 'vicky.srinath@gmail.com'},
 
   ]);
 
   const renderItem = ({item}) => (
-    <TouchableOpacity onPress={() => navigation.navigate('Userinfo')}>
+    <TouchableOpacity onPress={() => navigation.navigate('Userinfo', { item })}>
     <View
       style={{
         alignSelf: 'center',
