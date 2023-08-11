@@ -265,7 +265,7 @@ function Dashboard() {
 
 function Userinfo({route}) {
   return (
-  <><View>
+  <View>
     <View backgroundColor='navy'>
     <TouchableOpacity style = {{
         backgroundColor: 'navy',
@@ -285,9 +285,9 @@ function Userinfo({route}) {
           Edit Profile
 
         </Text>
-        <View style={{ paddingTop: 10 }}>
+        <TouchableOpacity style={{ paddingTop: 10,}}>
           <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: route.params.item.userimage }} />
-        </View>
+        </TouchableOpacity>
       </View>
       </View>
       <Text style={{...styles.field, paddingTop: 30, textAlign: 'left', color: 'black',  fontSize: 18, paddingLeft: 20}}> Username </Text>
@@ -316,7 +316,7 @@ function Userinfo({route}) {
         placeholderTextColor={'black'}
       />
     </View> 
-      </>
+
   )
 
 }
