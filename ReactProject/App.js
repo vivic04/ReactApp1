@@ -14,9 +14,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TableOne from './Tableone';
 import { Image } from 'react-native';
+import { pushitem } from './Tableone';
 
 
 const Stack = createNativeStackNavigator();
+
+
 
 const App = () => {
   return (
@@ -67,6 +70,11 @@ const styles = StyleSheet.create({
 });
 
 function Registerscreen({navigation}) {
+  const obj = {
+    title: textInputFirstName + textInputLastName,
+    email: textInputEmail,
+    phone: PhoneInputValue
+  }
   const [textInputFirstName, setTextFirstInputName] = useState('');
   const [textInputLastName, setTextLastInputName] = useState('');
   const [textInputEmail, setTextInputEmail] = useState('');
@@ -163,8 +171,9 @@ function Registerscreen({navigation}) {
       issue = 'Difficult. ' + tips;
       alert(issue);
     } else {
-      navigation.navigate('Dashboard');
+      navigation.navigate('Dashboard', {obj});
     }
+    
   };
   return (
     <ImageBackground
@@ -181,15 +190,18 @@ function Registerscreen({navigation}) {
       {/* </ImageBackground> */}
       <Text style={{...styles.field, paddingTop: 30}}> First name</Text>
       <TextInput
+        ref= {(el) => { this.firstname = el; }}
         style={styles.textInput}
         placeholder="Enter First Name here"
         onChangeText={value => setTextFirstInputName(value)}
+        value4= {textInputFirstName}
       />
       <Text style={styles.field}> Last name</Text>
       <TextInput
         style={styles.textInput}
         placeholder="Enter Last Name here"
         onChangeText={value => setTextLastInputName(value)}
+        value3 = {textInputLastName}
       />
       <Text style={styles.field}> Email </Text>
       <TextInput
@@ -197,6 +209,7 @@ function Registerscreen({navigation}) {
         placeholder="Enter Email here"
         keyboardType="email-address"
         onChangeText={value => setTextInputEmail(value)}
+        value2 = {textInputEmail}
       />
       <Text style={styles.field}> Phone Number </Text>
       <TextInput
@@ -204,6 +217,7 @@ function Registerscreen({navigation}) {
         placeholder="Enter Phone number here"
         keyboardType="numeric"
         onChangeText={value => setPhoneInputValue(value)}
+        value1 = {PhoneInputValue}
       />
 
       <Text style={styles.field}> Password </Text>
