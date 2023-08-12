@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
   //   },
 });
 
+
 function Registerscreen({navigation}) {
   const obj = {
     title: textInputFirstName + textInputLastName,
@@ -278,6 +279,9 @@ function Dashboard() {
 }
 
 function Userinfo({route}) {
+  const changeimage = () => { 
+    route.params.item.userimage = 'https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Sheldon-J-Plankton.SpongeBob-SquarePants.webp'
+  }
   return (
   <View>
     <View backgroundColor='navy'>
@@ -299,7 +303,7 @@ function Userinfo({route}) {
           Edit Profile
 
         </Text>
-        <TouchableOpacity style={{ paddingTop: 10,}}>
+        <TouchableOpacity style={{ paddingTop: 10}} onPress={changeimage}>
           <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: route.params.item.userimage }} />
         </TouchableOpacity>
       </View>
@@ -334,5 +338,7 @@ function Userinfo({route}) {
   )
 
 }
+
+
 
 export default App;
