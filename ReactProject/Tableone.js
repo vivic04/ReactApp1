@@ -106,10 +106,11 @@ import { useNavigation } from '@react-navigation/native';
 //   return (setData = {...data, newitem})
   
 // }
-export function pushitem(){
-  <Text> Hi </Text>
-}
+export const getval = () => {
+  const { first, last, email, phone} = route.params;
+  setData = (olddata => [...olddata, [first + last, email, phone]])
 
+}
 const TableOne = () => {
   const navigation = useNavigation();
   // const onclick = () => {
@@ -204,6 +205,8 @@ const TableOne = () => {
     </TouchableOpacity>
     
   );
+
+
   const startIndex = currentPage * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
   const pageData = data.slice(startIndex, endIndex);
@@ -232,6 +235,5 @@ const TableOne = () => {
       
   );
 };
-
 
 export default TableOne;

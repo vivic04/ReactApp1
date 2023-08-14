@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   SafeAreaView,
+  Button,
 } from 'react-native';
 import {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
@@ -15,16 +16,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TableOne from './Tableone';
 import { Image } from 'react-native';
 import { pushitem } from './Tableone';
-
+import { useCallback } from 'react';
+import { getval } from './Tableone';
 
 const Stack = createNativeStackNavigator();
-
-
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Dashboard">
+      <Stack.Navigator initialRouteName="Registerscreen">
         <Stack.Screen
           name="Home"
           component={Registerscreen}
@@ -71,17 +71,17 @@ const styles = StyleSheet.create({
 
 
 function Registerscreen({navigation}) {
-  const obj = {
-    title: textInputFirstName + textInputLastName,
-    email: textInputEmail,
-    phone: PhoneInputValue
-  }
+//   function on() {
+//   // TableOne.setdata(oldArray => [...oldArray, newElement])
+//   navigation.navigate('Dashboard')
+// }
   const [textInputFirstName, setTextFirstInputName] = useState('');
   const [textInputLastName, setTextLastInputName] = useState('');
   const [textInputEmail, setTextInputEmail] = useState('');
   const [textInputPassword, setTextInputPassword] = useState('');
   const [TextInputConfirmPassword, setTextInputConfirmPassword] = useState('');
   const [PhoneInputValue, setPhoneInputValue] = useState('');
+  const [reguse, setreguse] = useState([]);
   const onRegister = () => {
     if (!textInputFirstName.trim()) {
       alert('Please Enter First Name');
@@ -134,6 +134,10 @@ function Registerscreen({navigation}) {
       return;
     }
   };
+
+
+  const navigateTodashboard = () => {     navigation.navigate('Dashboard', { textInputFirstName, textInputLastName, textInputEmail, PhoneInputValue});   };
+
   const validate = password => {
     var strength = 0;
     var tips = '';
@@ -172,9 +176,11 @@ function Registerscreen({navigation}) {
       issue = 'Difficult. ' + tips;
       alert(issue);
     } else {
-      navigation.navigate('Dashboard', {obj});
+      // navigation.navigate('Dashboard');
+      navigateTodashboard();
+      getval();
     }
-    
+
   };
   return (
     <ImageBackground
@@ -279,9 +285,6 @@ function Dashboard() {
 }
 
 function Userinfo({route}) {
-  const changeimage = () => { 
-    route.params.item.userimage = 'https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Sheldon-J-Plankton.SpongeBob-SquarePants.webp'
-  }
   return (
   <View>
     <View backgroundColor='navy'>
@@ -301,9 +304,8 @@ function Userinfo({route}) {
       <View style={{ backgroundColor: 'navy', height: 200, alignItems: 'center' }}>
         <Text style={{ fontSize: 25, color: 'white' }}>
           Edit Profile
-
         </Text>
-        <TouchableOpacity style={{ paddingTop: 10}} onPress={changeimage}>
+        <TouchableOpacity style={{ paddingTop: 10}}>
           <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: route.params.item.userimage }} />
         </TouchableOpacity>
       </View>
@@ -312,33 +314,32 @@ function Userinfo({route}) {
       <TextInput
         style={styles.textInput}
         placeholder={route.params.item.title}
-        placeholderTextColor={'black'}
+        TextColor={'black'}
       />
       <Text style={{...styles.field, paddingTop: 5, textAlign: 'left', color: 'black', fontSize: 18, paddingLeft: 20}}> Phone number </Text>
       <TextInput
         style={styles.textInput}
         placeholder={route.params.item.phone}
-        placeholderTextColor={'black'}
+        TextColor={'black'}
       />
       <Text style={{...styles.field, paddingTop: 5, textAlign: 'left', color: 'black', fontSize: 18, paddingLeft: 20}}> Email </Text>
       <TextInput
         style={styles.textInput}
         placeholder={route.params.item.email}
-        placeholderTextColor={'black'}
+        TextColor={'black'}
         keyboardType="email-address"
       />
       <Text style={{...styles.field, paddingTop: 5, textAlign: 'left', color: 'black', fontSize: 18, paddingLeft: 20}}> Task </Text>
       <TextInput
         style={styles.textInput}
         placeholder={route.params.item.task}
-        placeholderTextColor={'black'}
+        TextColor={'black'}
       />
     </View> 
 
   )
 
 }
-
 
 
 export default App;
