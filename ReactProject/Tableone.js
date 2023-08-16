@@ -100,24 +100,18 @@ import {StyleSheet} from 'react-native'
 import { Image } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
 
 // export function pushitem({route}) {
 //   let newitem = route.params.obj
 //   return (setData = {...data, newitem})
   
 // }
-export const getval = () => {
-  const { first, last, email, phone} = route.params;
-  setData = (olddata => [...olddata, [first + last, email, phone]])
+const TableOne = ({navigation, route}) => {
 
-}
-const TableOne = () => {
-  const navigation = useNavigation();
-  // const onclick = () => {
-  //   setData(...data, {title:textInputFirstName + textInputLastName, phone: PhoneInputValue, email: textInputEmail})
-  //  }
- 
   const [currentPage, setCurrentPage] = useState(0);
+  const [firstname, setfirstname] = useState('')
+
   const [data, setData] = useState([
     { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
 
@@ -178,6 +172,18 @@ const TableOne = () => {
     
   ]);
 
+  // const getval = () => {
+  //   setData = (olddata => [...olddata, [first + last, email, phone]])
+  //   const {first, last, email, phone} = route.params;
+  
+  // }
+
+  useEffect(() => {
+    const {first, last, email, phone} = route.params;
+    setfirstname(first);
+  });
+
+
   const PAGE_SIZE = 13
 
   const renderItem = ({item}) => (
@@ -219,6 +225,7 @@ const TableOne = () => {
         // keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
       />
+      <Text> {firstname}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
         <TouchableOpacity
           onPress={() => setCurrentPage(Math.max(currentPage - 1, 0))}

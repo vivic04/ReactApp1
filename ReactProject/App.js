@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   View,
   SafeAreaView,
   Button,
+  FlatList
 } from 'react-native';
 import {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
@@ -18,7 +19,6 @@ import { Image } from 'react-native';
 import { pushitem } from './Tableone';
 import { useCallback } from 'react';
 import { getval } from './Tableone';
-
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -71,6 +71,8 @@ const styles = StyleSheet.create({
 
 
 function Registerscreen({navigation}) {
+  const newElement =  {title: textInputFirstName + textInputLastName , phone: PhoneInputValue, email: textInputEmail}
+
 //   function on() {
 //   // TableOne.setdata(oldArray => [...oldArray, newElement])
 //   navigation.navigate('Dashboard')
@@ -136,7 +138,9 @@ function Registerscreen({navigation}) {
   };
 
 
-  const navigateTodashboard = () => {     navigation.navigate('Dashboard', { textInputFirstName, textInputLastName, textInputEmail, PhoneInputValue});   };
+  const navigateTodashboard = () => { 
+        navigation.navigate('Dashboard', {first: textInputFirstName, last:textInputLastName , email: textInputEmail, phone: PhoneInputValue});
+         };
 
   const validate = password => {
     var strength = 0;
@@ -176,9 +180,8 @@ function Registerscreen({navigation}) {
       issue = 'Difficult. ' + tips;
       alert(issue);
     } else {
-      // navigation.navigate('Dashboard');
       navigateTodashboard();
-      getval();
+
     }
 
   };
@@ -270,18 +273,155 @@ function Registerscreen({navigation}) {
   );
 }
 
-function Dashboard() {
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-    },
+function Dashboard({navigation, route}) {
+
+  // const styles = StyleSheet.create({
+  //   container: {
+  //     flex: 1,
+  //     backgroundColor: 'white',
+  //   },
+  // });
+  // return (
+  //   <SafeAreaView style={styles.container}>
+  //     <TableOne />
+  //   </SafeAreaView>
+  // );
+  const [currentPage, setCurrentPage] = useState(0);
+  const [firstname, setfirstname] = useState('')
+
+  const [data, setData] = useState([
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
+
+    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
+
+    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
+    
+  ]);
+
+  // const getval = () => {
+  //   setData = (olddata => [...olddata, [first + last, email, phone]])
+  //   const {first, last, email, phone} = route.params;
+  
+  // }
+
+  useEffect(() => {
+    const {first, last, email, phone} = route.params;
+    setfirstname(first);
+    setlastname(last);
+    setemail(email);
+
   });
-  return (
-    <SafeAreaView style={styles.container}>
-      <TableOne />
-    </SafeAreaView>
+
+
+  const PAGE_SIZE = 13
+
+  const renderItem = ({item}) => (
+    <TouchableOpacity onPress={() => navigation.navigate('Userinfo', { item })}
+      style={{
+        alignSelf: 'center',
+        width: '100%',
+        borderBottomWidth: 1.0,
+        borderColor: 'lightgrey',
+        paddingVertical: 8,
+        flexDirection: 'row'
+      }}>
+      <View style = {{justifyContent: 'center', alignItems: 'center', padding: 5}}>
+      <Image style={{height: 30, width: 32, borderRadius: 100,
+      }} source={{uri: item.userimage}}/>
+      </View>
+      <View style = {{}}> 
+      <Text style={{paddingBottom: 2}}>
+        {' '}
+        {item.title}{' '}
+      </Text>
+      <Text style = {{}}> 
+        {`Task: ${item.task}`} </Text>
+      </View>
+    </TouchableOpacity>
+    
   );
+
+
+  const startIndex = currentPage * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+  const pageData = data.slice(startIndex, endIndex);
+
+
+  return (
+    <>
+      <FlatList
+        data={pageData}
+        // keyExtractor={item => item.id.toString()}
+        renderItem={renderItem}
+      />
+      <Text> {firstname}</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
+        <TouchableOpacity
+          onPress={() => setCurrentPage(Math.max(currentPage - 1, 0))}
+          style={{ marginHorizontal: 10, padding: 5 }}>
+          <Text>Previous</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setCurrentPage(currentPage + 1)}
+          style={{ marginHorizontal: 10, padding: 5 }}>
+          <Text>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </>
+      
+  );
+  
 }
 
 function Userinfo({route}) {
