@@ -288,6 +288,9 @@ function Dashboard({navigation, route}) {
   // );
   const [currentPage, setCurrentPage] = useState(0);
   const [firstname, setfirstname] = useState('')
+  const [lastname, setlastname] = useState('')
+  const [email, setemail] = useState('')
+  const [phone, setphone] = useState('')
 
   const [data, setData] = useState([
     { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
@@ -360,9 +363,15 @@ function Dashboard({navigation, route}) {
     setfirstname(first);
     setlastname(last);
     setemail(email);
+    setphone(phone);
 
   });
 
+  const onclick = () => {
+    object = {title: firstname+lastname , email: email, phone:phone}
+    data.push(object)
+
+  }
 
   const PAGE_SIZE = 13
 
@@ -405,7 +414,7 @@ function Dashboard({navigation, route}) {
         // keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
       />
-      <Text> {firstname}</Text>
+      <Text> {[firstname, lastname, email, phone]}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
         <TouchableOpacity
           onPress={() => setCurrentPage(Math.max(currentPage - 1, 0))}
