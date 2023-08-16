@@ -181,6 +181,7 @@ function Registerscreen({navigation}) {
       alert(issue);
     } else {
       navigateTodashboard();
+      ;
 
     }
 
@@ -360,6 +361,7 @@ function Dashboard({navigation, route}) {
 
   useEffect(() => {
     const {first, last, email, phone} = route.params;
+    object = {title: firstname+ ''+lastname , email: email, phone:phone};
     setfirstname(first);
     setlastname(last);
     setemail(email);
@@ -367,11 +369,18 @@ function Dashboard({navigation, route}) {
 
   });
 
-  const onclick = () => {
-    object = {title: firstname+lastname , email: email, phone:phone}
-    data.push(object)
-
-  }
+  useEffect(() => {
+    
+    const {first, last, email, phone} = route.params;
+    title1 = firstname + '' + lastname
+    object = {title: title1 , email: email, phone:phone};
+    setfirstname(first);
+    setlastname(last);
+    setemail(email);
+    setphone(phone);
+    newdata = data.push(object)
+    setData(newdata)
+  })
 
   const PAGE_SIZE = 13
 
@@ -414,7 +423,6 @@ function Dashboard({navigation, route}) {
         // keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
       />
-      <Text> {[firstname, lastname, email, phone]}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
         <TouchableOpacity
           onPress={() => setCurrentPage(Math.max(currentPage - 1, 0))}
