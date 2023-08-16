@@ -6,19 +6,14 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
-  Button,
   FlatList
 } from 'react-native';
 import {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import TableOne from './Tableone';
 import { Image } from 'react-native';
-import { pushitem } from './Tableone';
-import { useCallback } from 'react';
-import { getval } from './Tableone';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
