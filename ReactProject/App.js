@@ -6,14 +6,19 @@ import {
   Text,
   TextInput,
   View,
+  SafeAreaView,
+  Button,
   FlatList
 } from 'react-native';
 import {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import TableOne from './Tableone';
 import { Image } from 'react-native';
-
+import { pushitem } from './Tableone';
+import { useCallback } from 'react';
+import { getval } from './Tableone';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -356,26 +361,27 @@ function Dashboard({navigation, route}) {
 
   useEffect(() => {
     const {first, last, email, phone} = route.params;
-    object = {title: firstname+ ''+lastname , email: email, phone:phone};
-    setfirstname(first);
-    setlastname(last);
-    setemail(email);
-    setphone(phone);
-
-  });
-
-  useEffect(() => {
-    
-    const {first, last, email, phone} = route.params;
-    title1 = firstname + '' + lastname
-    object = {title: title1 , email: email, phone:phone};
+    object = {title: firstname+lastname , email: email, phone:phone};
     setfirstname(first);
     setlastname(last);
     setemail(email);
     setphone(phone);
     newdata = data.push(object)
-    setData(newdata)
-  })
+  }, []);
+
+  // useEffect(() => {
+    
+  //   const {first, last, email, phone} = route.params;
+  //   title1 = firstname + '' + lastname
+  //   object = {title: title1 , email: email, phone:phone};
+  //   setfirstname(first);
+  //   setlastname(last);
+  //   setemail(email);
+  //   setphone(phone);
+  //   newdata = data.push(object)
+  //   setData(newdata)
+  // })
+
 
   const PAGE_SIZE = 13
 
@@ -408,7 +414,7 @@ function Dashboard({navigation, route}) {
 
   const startIndex = currentPage * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  const pageData = data.slice(startIndex, endIndex);
+  const pageData = data.slice(startIndex,endIndex)
 
 
   return (
