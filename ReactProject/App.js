@@ -290,67 +290,12 @@ function Dashboard({navigation, route}) {
   const [currentPage, setCurrentPage] = useState(0);
   const [firstname, setfirstname] = useState('')
   const [lastname, setlastname] = useState('')
-  const [email, setemail] = useState('')
-  const [phone, setphone] = useState('')
+  const [emailid, setemailid] = useState('')
+  const [phonenumber, setphonenumber] = useState('')
 
   const [data, setData] = useState([
     { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
 
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    { title: 'Ram Sharma ', task: 'work on something', userimage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxe8QZ72X2OjC-JXTaRtlom0O2lq60v729ZA&usqp=CAU', phone: '997123454', email: 'ram.sharma@gmail.com'},
-
-    { title: 'Aditya Chauhan', task: ' do some work', userimage: 'https://www.spongebobshop.com/cdn/shop/products/SB-Standees-Spong-3_800x.jpg?v=1603744568',  phone: '7756804', email: 'aditya.chauchan@gmail.com'},
-
-    { title: 'John bosh', task: 'work on helloword', userimage: 'https://miro.medium.com/v2/resize:fit:1024/0*YjYX05Vdd6K8UOY8.png',  phone: '546809586', email: 'john.bosh@gmail.com'},
-    
   ]);
 
   // const getval = () => {
@@ -358,16 +303,33 @@ function Dashboard({navigation, route}) {
   //   const {first, last, email, phone} = route.params;
   
   // }
+// const {first, last, email, phone} = route.params;
+// const fullname = first + ' ' + last
+// const object = {title: fullname , email: email, phone:phone, userimage:'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg'};
+// const newdata = [...data, object]
+//   useEffect(() => {
+    
+//     setfirstname(first);
+//     setlastname(last);
+//     setemailid(email);
+//     setphonenumber(phone);
+//     // newdata = data.push(object)
+//     // setData(newdata)
+//     console.log('responce data',data)
+//   }, [newdata]);
 
-  useEffect(() => {
-    const {first, last, email, phone} = route.params;
-    object = {title: firstname+lastname , email: email, phone:phone};
-    setfirstname(first);
-    setlastname(last);
-    setemail(email);
-    setphone(phone);
-    newdata = data.push(object)
-  }, []);
+useEffect(() => {
+  const { first, last, email, phone } = route.params;
+  const fullname = first + ' ' + last;
+  const newObject = {
+    title: fullname,
+    email: email,
+    phone: phone,
+    userimage: 'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg',
+  };
+
+  setData(prevData => [...prevData, newObject]);
+}, []);
 
   // useEffect(() => {
     
@@ -384,6 +346,8 @@ function Dashboard({navigation, route}) {
 
 
   const PAGE_SIZE = 13
+
+
 
   const renderItem = ({item}) => (
     <TouchableOpacity onPress={() => navigation.navigate('Userinfo', { item })}
@@ -411,30 +375,17 @@ function Dashboard({navigation, route}) {
     
   );
 
-
-  const startIndex = currentPage * PAGE_SIZE;
-  const endIndex = startIndex + PAGE_SIZE;
-  const pageData = data.slice(startIndex,endIndex)
-
+  // const startIndex = currentPage * PAGE_SIZE;
+  // const endIndex = startIndex + PAGE_SIZE;
 
   return (
     <>
       <FlatList
-        data={pageData}
-        // keyExtractor={item => item.id.toString()}
+        data={data}
+        keyExtractor={item => item.title}
         renderItem={renderItem}
       />
       <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
-        <TouchableOpacity
-          onPress={() => setCurrentPage(Math.max(currentPage - 1, 0))}
-          style={{ marginHorizontal: 10, padding: 5 }}>
-          <Text>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setCurrentPage(currentPage + 1)}
-          style={{ marginHorizontal: 10, padding: 5 }}>
-          <Text>Next</Text>
-        </TouchableOpacity>
       </View>
     </>
       
