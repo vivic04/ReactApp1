@@ -16,9 +16,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TableOne from './Tableone';
 import { Image } from 'react-native';
-import { pushitem } from './Tableone';
-import { useCallback } from 'react';
-import { getval } from './Tableone';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { openImagePicker } from './image';
+
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -387,7 +388,6 @@ const loadMoreData = () => {
     // const newItems = data.slice(startIndex, endIndex);
 
     setDataToShow([...dataToShow, ...newItems]);
-
     setCurrentPage(currentPage + 1);
 
   };
@@ -452,6 +452,7 @@ const loadMoreData = () => {
   );
   
 }
+
 function Userinfo({route}) {
   return (
   <View>
@@ -473,7 +474,7 @@ function Userinfo({route}) {
         <Text style={{ fontSize: 25, color: 'white' }}>
           Edit Profile
         </Text>
-        <TouchableOpacity style={{ paddingTop: 10}}>
+        <TouchableOpacity style={{ paddingTop: 10}} onPress={openImagePicker}>
           <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: route.params.item.userimage }} />
         </TouchableOpacity>
       </View>
