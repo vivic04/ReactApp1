@@ -14,10 +14,9 @@ import {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import TableOne from './Tableone';
 import { Image } from 'react-native';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import { openImagePicker } from './image';
+import { openImagePicker } from './image'
+import { launchCamera } from 'react-native-image-picker';
 
 
 const Stack = createNativeStackNavigator();
@@ -418,19 +417,8 @@ const loadMoreData = () => {
     
   );
 
-  // const startIndex = currentPage * PAGE_SIZE;
-  // const endIndex = startIndex + PAGE_SIZE;
-
   return (
-    // <>
-    //   <FlatList
-    //     data={data}
-    //     keyExtractor={item => item.title}
-    //     renderItem={renderItem}
-    //   />
-    //   <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
-    //   </View>
-    // </>
+
     <>
     <FlatList
 
@@ -454,6 +442,28 @@ const loadMoreData = () => {
 }
 
 function Userinfo({route}) {
+    // const [selectedImage, setSelectedImage] = useState('')
+    const launchimage = () => {
+        const options = {
+          mediaType: 'photo',
+          includeBase64: false,
+          maxHeight: 2000,
+          maxWidth: 2000,
+        };
+        launchImageLibrary(options, (response) => {
+          if (response.didCancel) {
+            console.log('User cancelled image picker');
+          } else if (response.error) {
+            console.log('Image picker error: ', response.error);
+          } else {
+            let imageUri = response.uri || response.assets?.[0]?.uri;
+            setSelectedImage(imageUri);
+          }
+        });
+    
+    }
+     };
+
   return (
   <View>
     <View backgroundColor='navy'>
@@ -474,7 +484,7 @@ function Userinfo({route}) {
         <Text style={{ fontSize: 25, color: 'white' }}>
           Edit Profile
         </Text>
-        <TouchableOpacity style={{ paddingTop: 10}} onPress={openImagePicker}>
+        <TouchableOpacity style={{ paddingTop: 10}} onPress={launchimage}>
           <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: route.params.item.userimage }} />
         </TouchableOpacity>
       </View>
