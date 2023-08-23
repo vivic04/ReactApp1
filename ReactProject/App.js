@@ -16,7 +16,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Image } from 'react-native';
 import { openImagePicker } from './image'
-import { launchCamera } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker'; 
 
 
 const Stack = createNativeStackNavigator();
@@ -324,26 +324,6 @@ function Dashboard({navigation, route}) {
 
   ]);
 
-  // const getval = () => {
-  //   setData = (olddata => [...olddata, [first + last, email, phone]])
-  //   const {first, last, email, phone} = route.params;
-  
-  // }
-// const {first, last, email, phone} = route.params;
-// const fullname = first + ' ' + last
-// const object = {title: fullname , email: email, phone:phone, userimage:'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg'};
-// const newdata = [...data, object]
-//   useEffect(() => {
-    
-//     setfirstname(first);
-//     setlastname(last);
-//     setemailid(email);
-//     setphonenumber(phone);
-//     // newdata = data.push(object)
-//     // setData(newdata)
-//     console.log('responce data',data)
-//   }, [newdata]);
-
 useEffect(() => {
   const { first, last, email, phone } = route.params;
   const fullname = first + ' ' + last;
@@ -380,11 +360,6 @@ useEffect(() => {
     const newItems = data.slice(startIndex, endIndex);
 
 const loadMoreData = () => {
-    // const startIndex = (currentPage - 1) * PAGE_SIZE;
-
-    // const endIndex = startIndex + PAGE_SIZE;
-
-    // const newItems = data.slice(startIndex, endIndex);
 
     setDataToShow([...dataToShow, ...newItems]);
     setCurrentPage(currentPage + 1);
@@ -422,7 +397,7 @@ const loadMoreData = () => {
     <>
     <FlatList
 
-        data={newItems}
+        data={data}
 
         keyExtractor={item => item.title}
 
@@ -442,8 +417,9 @@ const loadMoreData = () => {
 }
 
 function Userinfo({route}) {
-    // const [selectedImage, setSelectedImage] = useState('')
-    const launchimage = () => {
+
+    const [selectedImage, setSelectedImage] = useState(route.params.item.userimage)
+    const launchimage1 = () => {
         const options = {
           mediaType: 'photo',
           includeBase64: false,
@@ -462,7 +438,7 @@ function Userinfo({route}) {
         });
     
     }
-     };
+
 
   return (
   <View>
@@ -484,8 +460,8 @@ function Userinfo({route}) {
         <Text style={{ fontSize: 25, color: 'white' }}>
           Edit Profile
         </Text>
-        <TouchableOpacity style={{ paddingTop: 10}} onPress={launchimage}>
-          <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: route.params.item.userimage }} />
+        <TouchableOpacity style={{ paddingTop: 10}} onPress={launchimage1}>
+          <Image style={{ height: 130, width: 130, borderRadius: 100, }} source={{ uri: selectedImage }} />
         </TouchableOpacity>
       </View>
       </View>
