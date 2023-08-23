@@ -6,8 +6,6 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
-  Button,
   FlatList
 } from 'react-native';
 import {useState} from 'react';
@@ -192,13 +190,6 @@ function Registerscreen({navigation}) {
         uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
       }}
       style={{borderRadius: 1, flex: 1}}>
-      {/* <ImageBackground source={{uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'}} style = {{ height: 200, borderRadius: 1,}}> */}
-      {/* <Text style = {{fontWeight: 800, justifyContent: 'center', 
-    textAlign: 'center', flexDirection: 'column', paddingTop: 30, color: '#F2D0E4', fontSize: 30}}>
-      Mindsprint Native 
-  
-    </Text> */}
-      {/* </ImageBackground> */}
       <Text style={{...styles.field, paddingTop: 30}}> First name</Text>
       <TextInput
         ref= {(el) => { this.firstname = el; }}
@@ -247,10 +238,7 @@ function Registerscreen({navigation}) {
       />
 
       <View style={styles.button}>
-        {/* <Button 
-            title="Register"
-            onPress={checkTextInput}
-          /> */}
+
         <TouchableOpacity
           style={{
             backgroundColor: 'lightcoral',
@@ -276,17 +264,6 @@ function Registerscreen({navigation}) {
 
 function Dashboard({navigation, route}) {
 
-  // const styles = StyleSheet.create({
-  //   container: {
-  //     flex: 1,
-  //     backgroundColor: 'white',
-  //   },
-  // });
-  // return (
-  //   <SafeAreaView style={styles.container}>
-  //     <TableOne />
-  //   </SafeAreaView>
-  // );
   const [firstname, setfirstname] = useState('')
   const [lastname, setlastname] = useState('')
   const [emailid, setemailid] = useState('')
@@ -324,6 +301,67 @@ function Dashboard({navigation, route}) {
 
   ]);
 
+const Tab = createBottomTabNavigator();
+
+function MyTabBar({ state, descriptors, navigation }) {
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            // The `merge: true` option makes sure that the params inside the tab screen are preserved
+            navigation.navigate({ name: route.name, merge: true });
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{ flex: 1 }}
+          >
+            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+              {label}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+// ...
+
+<Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+</Tab.Navigator>
+
 useEffect(() => {
   const { first, last, email, phone } = route.params;
   const fullname = first + ' ' + last;
@@ -336,20 +374,6 @@ useEffect(() => {
 
   setData(prevData => [...prevData, newObject]);
 }, []);
-
-  // useEffect(() => {
-    
-  //   const {first, last, email, phone} = route.params;
-  //   title1 = firstname + '' + lastname
-  //   object = {title: title1 , email: email, phone:phone};
-  //   setfirstname(first);
-  //   setlastname(last);
-  //   setemail(email);
-  //   setphone(phone);
-  //   newdata = data.push(object)
-  //   setData(newdata)
-  // })
-
 
   const PAGE_SIZE = 13
 
@@ -438,6 +462,7 @@ function Userinfo({route}) {
         });
     
     }
+
 
 
   return (
