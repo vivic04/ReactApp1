@@ -357,8 +357,15 @@ const loadMoreData = () => {
     
   );
 
+  const BottomTab = () => {
+    return (
+      <Tab.Navigator>
+          <Tab.Screen name  = 'Home' component = {HomeScreen}/>
+          <Tab.Screen name  = 'User' component = {UserScreen}/>
+      </Tab.Navigator>
+    )
+  }
 
-const styles = StyleSheet.create({})
   return (
     
     <>
