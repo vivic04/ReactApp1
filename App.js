@@ -14,16 +14,17 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
+import { openImagePicker } from './image'
 import { launchImageLibrary } from 'react-native-image-picker'; 
-import UserScreen from './UserScreen';
-import HomeScreen from './HomeScreen';
 import BottomTab from './BottomTab';
+
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
+      
       <Stack.Navigator initialRouteName="Registerscreen">
         <Stack.Screen
           name="Home"
@@ -303,6 +304,7 @@ function Dashboard({navigation, route}) {
 
   ]);
 
+
 useEffect(() => {
   const { first, last, email, phone } = route.params;
   const fullname = first + ' ' + last;
@@ -357,12 +359,9 @@ const loadMoreData = () => {
     
   );
 
-
-const styles = StyleSheet.create({})
   return (
-    
+
     <>
-    
     <FlatList
 
         data={data}
