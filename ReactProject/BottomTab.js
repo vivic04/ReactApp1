@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from './HomeScreen';
-import UserScreen from './UserScreen';
+import UserScreen from './SettingsScreen';
 
 const Tab = createBottomTabNavigator;
 export  const BottomTab = () => {
