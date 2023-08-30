@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import {TouchableOpacity, View, Image, Text, FlatList} from 'react-native'
+import Feed from './Feed';
 
 
 export default function HomeScreen({navigation, route}) {
@@ -71,7 +72,7 @@ const loadMoreData = () => {
 
   const renderItem = ({item}) => (
     
-    <TouchableOpacity onPress={() => navigation.navigate('SettingsScreen', { obj: item })}
+    <TouchableOpacity onPress={() => navigation.navigate('SettingScreen', { obj: item })}
       style={{
         alignSelf: 'center',
         width: '100%',

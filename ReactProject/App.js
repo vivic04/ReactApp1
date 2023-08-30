@@ -12,18 +12,16 @@ import {TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image } from 'react-native';
-import { openImagePicker } from './image'
-import { launchImageLibrary } from 'react-native-image-picker'; 
-import BottomTab from './BottomTab';
+import { createStackNavigator } from '@react-navigation/stack';
 import SettingsScreen from './SettingsScreen';
 import HomeScreen from './HomeScreen';
 import Feed from './Feed';
 import Messages from './Messages';
+import RegisterScreen from './RegisterScreen';
 
 const Tab = createBottomTabNavigator();
 
-function Home() {
+export function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Feed" component={Feed} />
@@ -37,7 +35,8 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='RegisterScreen'>
+      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen
           name="Home"
           component={Home}
@@ -49,5 +48,6 @@ function App() {
     </NavigationContainer>
   );
 }
+
 
 export default App; 
